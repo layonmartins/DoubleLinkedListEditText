@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DoubleLinkedListEditText">
+        <attr name="size_elements" format="integer" />
+        <attr name="margin_between_elements" format="dimension" />
+        <attr name="element_layout_weight" format="dimension" />
+        <attr name="element_layout_height" format="dimension" />
+    </declare-styleable>
+</resources>
