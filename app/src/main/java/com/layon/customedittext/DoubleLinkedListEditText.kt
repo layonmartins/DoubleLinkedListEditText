@@ -2,7 +2,9 @@ package com.layon.customedittext
 
 import android.content.Context
 import android.graphics.Color
+import android.text.Editable
 import android.text.InputType
+import android.text.TextWatcher
 import android.util.AttributeSet
 import android.util.Log
 import android.widget.LinearLayout
@@ -10,17 +12,20 @@ import androidx.annotation.Dimension
 
 var TAG = "layon.f - DoubleLinkedListEditText"
 
-//TODO check the correct numbers
+//TODO remove the manually focus when user touch in a edittext between the first and last
 class DoubleLinkedListEditText(context: Context, attrs: AttributeSet) :
     LinearLayout(context, attrs) {
 
-    var size = 0
-    var head : NodeEditText? = null
-    var tail : NodeEditText? = null
+    private var size = 0
+    private var head : NodeEditText? = null
+    private var tail : NodeEditText? = null
+    private var inputCode : StringBuilder
+    private var count : Int = 0
 
 
     init {
         Log.d(TAG, "init()")
+        inputCode = StringBuilder()
         orientation = HORIZONTAL
         layoutParams =
             LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
@@ -53,6 +58,9 @@ class DoubleLinkedListEditText(context: Context, attrs: AttributeSet) :
             node.hint = "$it"
             node.inputType = InputType.TYPE_CLASS_NUMBER //TODO pass this by attrs
             node.setMaxLength(1)
+            node.index = it
+            inputCode.append("*")
+            setTextWatcher(node)
             addView(node)
             addInTail(node)
             Log.d(TAG, "add nodeEditText: $node")
@@ -69,6 +77,46 @@ class DoubleLinkedListEditText(context: Context, attrs: AttributeSet) :
         if(oldTail != null) oldTail.next = tail
         this.size++
         print()
+    }
+
+    fun setTextWatcher(node: NodeEditText){
+        Log.d(TAG, "adding TextWatcher")
+        node.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {
+                Log.d(TAG,"afterTextChanged()")
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+                Log.d(TAG,"beforeTextChanged()")
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, after: Int) {
+                Log.d(TAG,"onTextChanged(): $s start: $start before: $before after: $after")
+                if(after == 1){
+                    Log.d(TAG,"go to next")
+                    //inputCode.append(s)
+                    //inputCode.insert(node.index!!, s)
+                    inputCode[node.index!!] = s[0]
+                    count++
+                    Log.d(TAG,"inputCode: $inputCode")
+                    Log.d(TAG,"count: $count == size: $size")
+                    if(count == size){
+                        Log.d(TAG, "check the code")
+                        //TODO call a callback to be called in MainActivity equals is done in QR feature in wemob
+                    } else {
+                        node.next?.requestFocus()
+                    }
+                } else {
+                    Log.d(TAG,"go to prev")
+                    //inputCode.deleteAt(node.index!!)
+                    //inputCode.insert(node.index!!, "*")
+                    inputCode[node.index!!] = '*'
+                    count--
+                    Log.d(TAG,"inputCode: $inputCode")
+                    node.prev?.requestFocus()
+                }
+            }
+        })
     }
 
     fun print(){
