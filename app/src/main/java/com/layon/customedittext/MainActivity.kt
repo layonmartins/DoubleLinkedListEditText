@@ -14,19 +14,21 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        createEditText(3)
+
+        val doubleLinkedListEditText: DoubleLinkedListEditText = findViewById(R.id.doubleLinkedListEditText)
+
+        doubleLinkedListEditText.setCheckCodeCallback( object : CheckCodeCallback{
+            override fun checkCode(code: String) {
+                if (code == "123"){
+                    Log.d(TAG, "checkCode success")
+                    //do whatever you want
+                } else {
+                    Log.d(TAG, "checkCode fail")
+                    doubleLinkedListEditText.enableFailLayout()
+                }
+            }
+        })
+
     }
 
-    //create the custons editText and add inside this LinearLayout
-    private fun createEditText(size: Int) {
-        repeat(size) {
-            val edit = NodeEditText(this)
-            edit.layoutParams = LinearLayout.LayoutParams(200, 200)
-            edit.setBackgroundColor(Color.GREEN)
-            edit.hint = "0"
-            val linearLayout : LinearLayout = findViewById(R.id.my_linear_layout)
-            linearLayout.addView(edit)
-            Log.d(TAG, "add nodeEditText: $edit")
-        }
-    }
 }

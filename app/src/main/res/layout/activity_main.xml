@@ -27,20 +27,4 @@
         app:layout_constraintTop_toTopOf="parent">
     </com.layon.customedittext.DoubleLinkedListEditText>
 
-    <LinearLayout
-        android:id="@+id/my_linear_layout"
-        android:layout_width="300dp"
-        android:layout_height="100dp"
-        android:layout_margin="10dp"
-        android:layout_marginBottom="100dp"
-        android:background="#FAED79"
-        android:orientation="horizontal"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent">
-
-    </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

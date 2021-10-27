@@ -21,7 +21,7 @@ class DoubleLinkedListEditText(context: Context, attrs: AttributeSet) :
     private var tail : NodeEditText? = null
     private var inputCode : StringBuilder
     private var count : Int = 0
-
+    private lateinit var callback : CheckCodeCallback
 
     init {
         Log.d(TAG, "init()")
@@ -67,7 +67,7 @@ class DoubleLinkedListEditText(context: Context, attrs: AttributeSet) :
         }
     }
 
-    fun addInTail(node: NodeEditText) {
+    private fun addInTail(node: NodeEditText) {
         Log.d(TAG,"\naddInTail()")
         if(size == 0) head = node
         node.next = null
@@ -79,7 +79,21 @@ class DoubleLinkedListEditText(context: Context, attrs: AttributeSet) :
         print()
     }
 
-    fun setTextWatcher(node: NodeEditText){
+    fun setCheckCodeCallback(c : CheckCodeCallback){
+        callback = c
+    }
+
+    private fun checkCode(){
+        if(this::callback.isInitialized){
+            callback.checkCode(inputCode.toString())
+        }
+    }
+
+    fun enableFailLayout(){
+        //TODO enable fail layout
+    }
+
+    private fun setTextWatcher(node: NodeEditText){
         Log.d(TAG, "adding TextWatcher")
         node.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
@@ -102,7 +116,7 @@ class DoubleLinkedListEditText(context: Context, attrs: AttributeSet) :
                     Log.d(TAG,"count: $count == size: $size")
                     if(count == size){
                         Log.d(TAG, "check the code")
-                        //TODO call a callback to be called in MainActivity equals is done in QR feature in wemob
+                        checkCode()
                     } else {
                         node.next?.requestFocus()
                     }
@@ -119,7 +133,7 @@ class DoubleLinkedListEditText(context: Context, attrs: AttributeSet) :
         })
     }
 
-    fun print(){
+    private fun print(){
         if (size == 0) {
             Log.d(TAG, "list is empty")
             return
