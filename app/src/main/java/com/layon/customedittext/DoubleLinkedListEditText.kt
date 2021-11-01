@@ -1,14 +1,18 @@
 package com.layon.customedittext
 
+import android.app.Activity
 import android.content.Context
-import android.graphics.Color
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.util.Log
+import android.view.Gravity
+import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
-import androidx.annotation.Dimension
+import androidx.core.content.ContextCompat.getSystemService
+
 
 var TAG = "layon.f - DoubleLinkedListEditText"
 
@@ -40,6 +44,7 @@ class DoubleLinkedListEditText(context: Context, attrs: AttributeSet) :
                         getDimensionPixelSize(R.styleable.DoubleLinkedListEditText_element_layout_height, 100)
                     )
                     createEditText(sizeElements, marginBetween, width, height)
+                    selectFirstAutomatic()
                 } finally {
                     recycle()
                 }
@@ -54,8 +59,8 @@ class DoubleLinkedListEditText(context: Context, attrs: AttributeSet) :
             val params = LayoutParams(width, height)
             params.setMargins(margin, 0, margin, 0)
             node.layoutParams = params
-            node.setBackgroundColor(Color.GREEN)
-            node.hint = "$it"
+            node.gravity = Gravity.CENTER
+            node.setBackgroundResource(R.drawable.custom_background)
             node.inputType = InputType.TYPE_CLASS_NUMBER //TODO pass this by attrs
             node.setMaxLength(1)
             node.index = it
@@ -65,6 +70,14 @@ class DoubleLinkedListEditText(context: Context, attrs: AttributeSet) :
             addInTail(node)
             Log.d(TAG, "add nodeEditText: $node")
         }
+    }
+
+    //TODO: execute only is flag is trueß
+    private fun selectFirstAutomatic(){
+        head?.requestFocus()
+        //TODO: open keyboard automatically is not working
+        //val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        //inputMethodManager?.showSoftInput(head, InputMethodManager.SHOW_IMPLICIT)
     }
 
     private fun addInTail(node: NodeEditText) {
@@ -79,6 +92,22 @@ class DoubleLinkedListEditText(context: Context, attrs: AttributeSet) :
         print()
     }
 
+    fun setErrorBackground(){
+        var n = head
+        while(n != null) {
+            n.setBackgroundResource(R.drawable.custom_background_error)
+            n = n.next
+        }
+    }
+
+    fun setSuccessBackground(){
+        var n = head
+        while(n != null) {
+            n.setBackgroundResource(R.drawable.custom_background_success)
+            n = n.next
+        }
+    }
+
     fun setCheckCodeCallback(c : CheckCodeCallback){
         callback = c
     }
@@ -87,10 +116,6 @@ class DoubleLinkedListEditText(context: Context, attrs: AttributeSet) :
         if(this::callback.isInitialized){
             callback.checkCode(inputCode.toString())
         }
-    }
-
-    fun enableFailLayout(){
-        //TODO enable fail layout
     }
 
     private fun setTextWatcher(node: NodeEditText){
@@ -108,26 +133,24 @@ class DoubleLinkedListEditText(context: Context, attrs: AttributeSet) :
                 Log.d(TAG,"onTextChanged(): $s start: $start before: $before after: $after")
                 if(after == 1){
                     Log.d(TAG,"go to next")
-                    //inputCode.append(s)
-                    //inputCode.insert(node.index!!, s)
                     inputCode[node.index!!] = s[0]
-                    count++
                     Log.d(TAG,"inputCode: $inputCode")
                     Log.d(TAG,"count: $count == size: $size")
+                    count++
                     if(count == size){
                         Log.d(TAG, "check the code")
                         checkCode()
                     } else {
                         node.next?.requestFocus()
+                        node.setBackgroundResource(R.drawable.custom_background)
                     }
                 } else {
                     Log.d(TAG,"go to prev")
-                    //inputCode.deleteAt(node.index!!)
-                    //inputCode.insert(node.index!!, "*")
                     inputCode[node.index!!] = '*'
-                    count--
                     Log.d(TAG,"inputCode: $inputCode")
                     node.prev?.requestFocus()
+                    node.setBackgroundResource(R.drawable.custom_background)
+                    count--
                 }
             }
         })
