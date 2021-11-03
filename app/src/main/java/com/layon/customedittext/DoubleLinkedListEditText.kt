@@ -1,17 +1,13 @@
 package com.layon.customedittext
 
-import android.app.Activity
 import android.content.Context
-import android.content.Context.INPUT_METHOD_SERVICE
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.util.Log
 import android.view.Gravity
-import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
-import androidx.core.content.ContextCompat.getSystemService
 
 
 var TAG = "layon.f - DoubleLinkedListEditText"
@@ -72,7 +68,7 @@ class DoubleLinkedListEditText(context: Context, attrs: AttributeSet) :
         }
     }
 
-    //TODO: execute only is flag is trueß
+    //TODO: execute only if this flag is true
     private fun selectFirstAutomatic(){
         head?.requestFocus()
         //TODO: open keyboard automatically is not working

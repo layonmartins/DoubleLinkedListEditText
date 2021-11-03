@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         doubleLinkedListEditText.setCheckCodeCallback( object : CheckCodeCallback{
             override fun checkCode(code: String) {
-                if (code == "123"){
+                if (code == "12345"){
                     Log.d(TAG, "checkCode success")
                     doubleLinkedListEditText.setSuccessBackground()
                     //do whatever you want
