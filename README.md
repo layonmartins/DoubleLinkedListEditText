@@ -1,8 +1,8 @@
 # DoubleLinkedListEditText Library
 
-## This is a library to create a EditText based on Doubly Linked List data structure to the user be able input codes.
+### This is a library to create an EditText based on the Doubly Linked List data structure so that the user can enter codes.
 
-![GIF](https://github.com/layonmartins/DoubleLinkedListEditText/TesteLibrary.gif?raw=true)
+<img src="TesteLibrary.gif" width="30%" />
 
 [![](https://jitpack.io/v/layonmartins/DoubleLinkedListEditText.svg)](hhttps://jitpack.io/#layonmartins/DoubleLinkedListEditText/1.1.1)
 
@@ -28,7 +28,7 @@ dependencies {
 
 ## Usage
 
-You can add the custom ViewGroup in your layout view by add in xml:
+You can add the custom DoubleLinkedListEditText in your layout view by add in xml:
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -59,6 +59,15 @@ You can add the custom ViewGroup in your layout view by add in xml:
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
+
+Use this xml atributes to config your codes:
+| Property                       |               Value / Type              |                   Goal                   |
+|--------------------------------|:---------------------------------------:|:----------------------------------------:|
+| app:size_elements              |                int                      |     the number of input code elements    |
+| app:element_layout_weight      |                 dp                      |     layout_weight of each element        |
+| app:element_layout_height      |                 dp                      |     layout_height of each element        |
+| app:margin_between_elements    |                 dp                      |     the margin between of each element   |
+
 
 And in your Activity/Fragment layout you can use a CheckCodeCallbalck to listener the finally user inputs (Kotlin):
 
@@ -97,9 +106,7 @@ class MainActivity : AppCompatActivity() {
 
 ## Image
 
-<img src="Screenshot_1636036969.png" width="30%">
-<img src="Screenshot_1636036978.png" width="30%">
-<img src="Screenshot_1636036984.png" width="30%">
+<img src="Screenshot_1636036969.png" width="20%"> <img src="Screenshot_1636036978.png" width="20%"> <img src="Screenshot_1636036984.png" width="20%">
 
 ## Technologies
 
