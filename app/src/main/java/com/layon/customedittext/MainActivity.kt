@@ -1,13 +1,9 @@
 package com.layon.customedittext
 
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import android.view.inputmethod.InputMethodManager
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
+import com.layon.doublelinkedlistlibrary.DoubleLinkedListEditText
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,7 +15,8 @@ class MainActivity : AppCompatActivity() {
 
         val doubleLinkedListEditText: DoubleLinkedListEditText = findViewById(R.id.doubleLinkedListEditText)
 
-        doubleLinkedListEditText.setCheckCodeCallback( object : CheckCodeCallback{
+        doubleLinkedListEditText.setCheckCodeCallback( object :
+            com.layon.doublelinkedlistlibrary.CheckCodeCallback {
             override fun checkCode(code: String) {
                 if (code == "12345"){
                     Log.d(TAG, "checkCode success")

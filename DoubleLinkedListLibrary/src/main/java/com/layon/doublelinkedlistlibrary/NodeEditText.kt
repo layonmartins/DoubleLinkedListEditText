@@ -1,10 +1,7 @@
-package com.layon.customedittext
+package com.layon.doublelinkedlistlibrary
 
 import android.content.Context
-import android.text.Editable
 import android.text.InputFilter
-import android.text.TextWatcher
-import android.util.Log
 import androidx.appcompat.widget.AppCompatEditText
 
 class NodeEditText(context: Context) : AppCompatEditText(context)

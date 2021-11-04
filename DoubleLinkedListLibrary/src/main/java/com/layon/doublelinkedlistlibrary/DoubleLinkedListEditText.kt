@@ -1,4 +1,4 @@
-package com.layon.customedittext
+package com.layon.doublelinkedlistlibrary
 
 import android.content.Context
 import android.text.Editable
@@ -21,7 +21,7 @@ class DoubleLinkedListEditText(context: Context, attrs: AttributeSet) :
     private var tail : NodeEditText? = null
     private var inputCode : StringBuilder
     private var count : Int = 0
-    private lateinit var callback : CheckCodeCallback
+    private lateinit var callback : com.layon.doublelinkedlistlibrary.CheckCodeCallback
 
     init {
         Log.d(TAG, "init()")
@@ -104,7 +104,7 @@ class DoubleLinkedListEditText(context: Context, attrs: AttributeSet) :
         }
     }
 
-    fun setCheckCodeCallback(c : CheckCodeCallback){
+    fun setCheckCodeCallback(c : com.layon.doublelinkedlistlibrary.CheckCodeCallback){
         callback = c
     }
 

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.layon.customedittext.DoubleLinkedListEditText
+    <com.layon.doublelinkedlistlibrary.DoubleLinkedListEditText
         android:id="@+id/doubleLinkedListEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,6 +24,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-    </com.layon.customedittext.DoubleLinkedListEditText>
+    </com.layon.doublelinkedlistlibrary.DoubleLinkedListEditText>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

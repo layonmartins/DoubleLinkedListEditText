@@ -1,2 +1,3 @@
 rootProject.name = "CustomEditText"
 include ':app'
+include ':DoubleLinkedListLibrary'
