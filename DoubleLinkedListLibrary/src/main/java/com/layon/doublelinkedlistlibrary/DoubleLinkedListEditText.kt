@@ -70,8 +70,8 @@ class DoubleLinkedListEditText(context: Context, attrs: AttributeSet) :
 
     //TODO: execute only if this flag is true
     private fun selectFirstAutomatic(){
-        head?.requestFocus()
         //TODO: open keyboard automatically is not working
+        //head?.requestFocus()
         //val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         //inputMethodManager?.showSoftInput(head, InputMethodManager.SHOW_IMPLICIT)
     }
